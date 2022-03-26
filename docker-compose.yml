@@ -1,0 +1,23 @@
+version: "2"
+services:
+  summary-app:
+    container_name: summary-app
+    build: app/
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3307:3308"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: summary
+
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
